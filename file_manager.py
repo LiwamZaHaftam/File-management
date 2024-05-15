@@ -30,5 +30,10 @@ class FileManager:
             str: The content of the file.
         """
         
-        with open(file_path, 'r') as f:
+        try:
+            with open(file_path, 'r') as f:
                 return f.read()
+        except OSError as e:
+            raise e
+        except PermissionError as e:
+            raise PermissionError(f"Unable to read file {file_path} due to permission error: {e}")
