@@ -41,6 +41,20 @@ class TestFileManager(unittest.TestCase):
     def test_change_to_non_existent_directory(self):
         with self.assertRaises(OSError):
             self.file_manager.change_directory('/non-existent-directory')
+            
+    @patch('builtins.open', mock_open(read_data='test content'))
+    def test_change_to_file_path(self):
+        file_path = os.path.join(self.test_dir, 'test.txt')
+        with open(file_path, 'w') as f:
+            f.write('test content')
+
+        with self.assertRaises(OSError) as context:
+            self.file_manager.change_directory(file_path)
+        self.assertIn('is not a valid directory', str(context.exception))
+
+    def test_change_to_empty_path(self):
+        with self.assertRaises(OSError):
+            self.file_manager.change_directory('')
 
   
 
