@@ -10,7 +10,9 @@ class TestFileManager(unittest.TestCase):
     self.file_manager = FileManager()
     self.test_file_path = 'test_file.txt'
     os.makedirs(self.test_dir, exist_ok=True)
+    print(f"Starting test: {self._testMethodName}")
   
   def tearDown(self):
     '''cleaning up the environment after executing each test method'''
     shutil.rmtree(self.test_dir)
+    print(f"Finished test: {self._testMethodName}")
