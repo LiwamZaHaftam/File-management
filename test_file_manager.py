@@ -67,6 +67,11 @@ class TestFileManager(unittest.TestCase):
 
        content = self.file_manager.read_file(file_path)
        self.assertEqual(content, 'test content')
+       
+    def test_read_non_existent_file(self):
+       file_path = os.path.join(self.test_dir, 'non_existent.txt')
+       with self.assertRaises(OSError):
+           self.file_manager.read_file(file_path)
   
   
 
