@@ -18,3 +18,17 @@ class FileManager:
             self.current_directory = path
         else:
             raise OSError(f"{path} is not a valid directory.")
+        
+    def read_file(self, file_path):
+        """
+        Read the content of the specified file.
+
+        Args:
+            file_path (str): The path of the file to read.
+
+        Returns:
+            str: The content of the file.
+        """
+        
+        with open(file_path, 'r') as f:
+                return f.read()
