@@ -22,7 +22,6 @@ class TestFileManager(unittest.TestCase):
         os.chmod(self.test_file_path, 0o644)  # Restore file permissions
         shutil.rmtree(self.test_dir)
         print(f"Finished test: {self._testMethodName}")
-    
         
     def test_change_to_valid_directory(self):
         ''' testing by passing valid directory'''
@@ -33,6 +32,7 @@ class TestFileManager(unittest.TestCase):
         ''' testing by passing the root of the curent directory'''
         self.file_manager.change_directory('/')
         self.assertEqual(self.file_manager.current_directory, '/')
+
     def test_change_to_relative_directory(self):
         os.makedirs(os.path.join(self.test_dir, 'subdir'), exist_ok=True)
         self.file_manager.change_directory(os.path.join(self.test_dir, 'subdir'))
@@ -55,10 +55,11 @@ class TestFileManager(unittest.TestCase):
     def test_change_to_empty_path(self):
         with self.assertRaises(OSError):
             self.file_manager.change_directory('')
-
-  
-  
-  
+            
+    
+    
+    
+    
     @patch('builtins.open', mock_open(read_data='test content'))
     def test_read_file(self):
        file_path = os.path.join(self.test_dir, 'test.txt')
@@ -67,19 +68,24 @@ class TestFileManager(unittest.TestCase):
 
        content = self.file_manager.read_file(file_path)
        self.assertEqual(content, 'test content')
-       
+
     def test_read_non_existent_file(self):
        file_path = os.path.join(self.test_dir, 'non_existent.txt')
        with self.assertRaises(OSError):
            self.file_manager.read_file(file_path)
-
+           
+     
     def test_read_file_with_permission_error(self):
         with patch('builtins.open', mock_open(read_data='test content')) as mock_file:
             mock_file.side_effect = PermissionError("Permission denied")
             with self.assertRaises(PermissionError) as context:
                 self.file_manager.read_file(self.test_file_path)
             self.assertIn("Permission denied", str(context.exception))
-  
+
+
+
+
+
   
 
 if __name__ == '__main__':
