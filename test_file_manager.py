@@ -72,6 +72,13 @@ class TestFileManager(unittest.TestCase):
        file_path = os.path.join(self.test_dir, 'non_existent.txt')
        with self.assertRaises(OSError):
            self.file_manager.read_file(file_path)
+
+    def test_read_file_with_permission_error(self):
+        with patch('builtins.open', mock_open(read_data='test content')) as mock_file:
+            mock_file.side_effect = PermissionError("Permission denied")
+            with self.assertRaises(PermissionError) as context:
+                self.file_manager.read_file(self.test_file_path)
+            self.assertIn("Permission denied", str(context.exception))
   
   
 
