@@ -57,6 +57,18 @@ class TestFileManager(unittest.TestCase):
             self.file_manager.change_directory('')
 
   
+  
+  
+    @patch('builtins.open', mock_open(read_data='test content'))
+    def test_read_file(self):
+       file_path = os.path.join(self.test_dir, 'test.txt')
+       with open(file_path, 'w') as f:
+           f.write('test content')
+
+       content = self.file_manager.read_file(file_path)
+       self.assertEqual(content, 'test content')
+  
+  
 
 if __name__ == '__main__':
     unittest.main()
