@@ -33,6 +33,14 @@ class TestFileManager(unittest.TestCase):
         ''' testing by passing the root of the curent directory'''
         self.file_manager.change_directory('/')
         self.assertEqual(self.file_manager.current_directory, '/')
+    def test_change_to_relative_directory(self):
+        os.makedirs(os.path.join(self.test_dir, 'subdir'), exist_ok=True)
+        self.file_manager.change_directory(os.path.join(self.test_dir, 'subdir'))
+        self.assertEqual(self.file_manager.current_directory, os.path.join(self.test_dir, 'subdir'))
+
+    def test_change_to_non_existent_directory(self):
+        with self.assertRaises(OSError):
+            self.file_manager.change_directory('/non-existent-directory')
 
   
 
