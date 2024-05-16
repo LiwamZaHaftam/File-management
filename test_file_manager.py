@@ -85,6 +85,16 @@ class TestFileManager(unittest.TestCase):
 
 
 
+    def test_create_file_in_valid_directory(self):
+        """Test creating a file in a valid directory."""
+        self.file_manager.change_directory(self.test_dir)
+        new_file_path = os.path.join(self.test_dir, 'new_file.txt')
+        self.file_manager.create('new_file.txt', 'new file content')
+        self.assertTrue(os.path.exists(new_file_path))
+        with open(new_file_path, 'r') as f:
+            self.assertEqual(f.read(), 'new file content')
+
+
 
   
 
