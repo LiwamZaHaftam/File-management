@@ -110,5 +110,12 @@ class TestFileManager(unittest.TestCase):
             mock_open_func.assert_called_once_with(new_file_path, 'w')
 
 
+    def test_delete_file_in_valid_directory(self):
+        """Test deleting a file in a valid directory."""
+        self.file_manager.change_directory(self.test_dir)
+        file_path = os.path.join(self.test_dir, 'test.txt')
+        self.file_manager.delete(file_path)
+        self.assertFalse(os.path.exists(file_path))
+
 if __name__ == '__main__':
     unittest.main()
