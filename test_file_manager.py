@@ -89,7 +89,7 @@ class TestFileManager(unittest.TestCase):
         """Test creating a file in a valid directory."""
         self.file_manager.change_directory(self.test_dir)
         new_file_path = os.path.join(self.test_dir, 'new_file.txt')
-        self.file_manager.create('new_file.txt', 'new file content')
+        self.file_manager.create_file('new_file.txt', 'new file content')
         self.assertTrue(os.path.exists(new_file_path))
         with open(new_file_path, 'r') as f:
             self.assertEqual(f.read(), 'new file content')
@@ -98,14 +98,14 @@ class TestFileManager(unittest.TestCase):
     def test_create_file_with_empty_filename(self):
         """Test creating a file with an empty filename."""
         with self.assertRaises(ValueError):
-            self.file_manager.create('', 'new file content')
+            self.file_manager.create_file('', 'new file content')
             
     def test_create_file_with_mock_open(self):
         """Test creating a file using a mocked open function."""
         with patch('builtins.open', mock_open()) as mock_open_func:
             self.file_manager.change_directory(self.test_dir)
             new_file_path = os.path.join(self.test_dir, 'new_file.txt')
-            self.file_manager.create('new_file.txt', 'new file content')
+            self.file_manager.create_file('new_file.txt', 'new file content')
             mock_open_func.assert_called_once_with(new_file_path, 'w')
 
 
