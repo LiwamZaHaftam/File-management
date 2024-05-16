@@ -95,7 +95,10 @@ class TestFileManager(unittest.TestCase):
             self.assertEqual(f.read(), 'new file content')
 
 
-
+    def test_create_file_with_empty_filename(self):
+        """Test creating a file with an empty filename."""
+        with self.assertRaises(ValueError):
+            self.file_manager.create('', 'new file content')
   
 
 if __name__ == '__main__':
