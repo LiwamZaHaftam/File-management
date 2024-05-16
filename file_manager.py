@@ -57,3 +57,11 @@ class FileManager:
             else:
                 raise e   
 
+    def delete(self, file_path):
+        """Delete the specified file."""
+        try:
+            os.chmod(file_path, 0o644)  # Set file to writable
+            os.remove(file_path)
+        except OSError as e:
+            raise OSError(f"Cannot delete file '{file_path}': {e}")
+
