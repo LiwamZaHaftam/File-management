@@ -37,3 +37,22 @@ class FileManager:
             raise e
         except PermissionError as e:
             raise PermissionError(f"Unable to read file {file_path} due to permission error: {e}")
+
+
+    def create_file(self, filename, content):
+        if not filename:
+            raise ValueError("Filename cannot be empty")
+
+        file_path = os.path.join(self.current_directory, filename)
+        print(file_path)
+        try:
+            # Check if the directory is writable
+            if not os.access(self.current_directory, os.W_OK):
+                raise OSError(f"Cannot create file in {self.current_directory} (permission denied)")
+            with open(file_path, 'w') as f:
+                f.write(content)
+        except OSError as e:
+            if 'Permission denied' in str(e):
+                raise OSError(f"Cannot create file in {self.current_directory} (permission denied)")
+            else:
+                raise e   
