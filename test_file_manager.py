@@ -154,5 +154,13 @@ class TestFileManager(unittest.TestCase):
         expected_hash = hashlib.sha256('test content'.encode()).hexdigest()
         file_hash = self.file_manager.calculate_file_hash(file_path)
         self.assertEqual(file_hash, expected_hash)
+
+    def test_calculate_hash_for_non_existent_file(self):
+        """Test calculating the hash of a non-existent file."""
+        non_existent_file = os.path.join(self.test_dir, 'non_existent.txt')
+        with self.assertRaises(OSError):
+            self.file_manager.calculate_file_hash(non_existent_file)
+
+
 if __name__ == '__main__':
     unittest.main()
