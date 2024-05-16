@@ -73,3 +73,17 @@ class FileManager:
             return os.listdir(directory)
         except OSError as e:
             raise OSError(f"Cannot list files in '{directory}': {e}")
+
+    
+
+    def calculate_file_hash(self, file_path):
+        """Calculate the SHA-256 hash of a file."""
+        try:
+            with open(file_path, 'rb') as f:
+                file_hash = hashlib.sha256()
+                while chunk := f.read(8192):
+                    file_hash.update(chunk)
+            return file_hash.hexdigest()
+        except OSError as e:
+            raise e
+
