@@ -9,7 +9,7 @@ class FileManager:
         """
         Change the current working directory to the specified path.
 
-        Args:
+        Args: 
         path (str): The path to change the directory to.
         """
         if not path:
