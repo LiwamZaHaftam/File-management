@@ -65,3 +65,11 @@ class FileManager:
         except OSError as e:
             raise OSError(f"Cannot delete file '{file_path}': {e}")
 
+    def list_files(self, directory=None):
+        """List the files in the specified directory."""
+        if directory is None:
+            directory = self.current_directory
+        try:
+            return os.listdir(directory)
+        except OSError as e:
+            raise OSError(f"Cannot list files in '{directory}': {e}")
