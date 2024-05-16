@@ -123,6 +123,8 @@ class TestFileManager(unittest.TestCase):
         with self.assertRaises(OSError):
             self.file_manager.delete(non_existent_file)
 
+
+    
     def test_list_files_in_valid_directory(self):
         """Test listing files in a valid directory."""
         self.file_manager.change_directory(self.test_dir)
@@ -130,6 +132,13 @@ class TestFileManager(unittest.TestCase):
         self.assertIn('test.txt', files)
 
 
+    def test_list_files_in_empty_directory(self):
+        """Test listing files in an empty directory."""
+        empty_dir = os.path.join(self.test_dir, 'empty_dir')
+        os.makedirs(empty_dir, exist_ok=True)
+        self.file_manager.change_directory(empty_dir)
+        files = self.file_manager.list_files()
+        self.assertEqual(files, [])
 
 if __name__ == '__main__':
     unittest.main()
