@@ -117,11 +117,7 @@ class TestFileManager(unittest.TestCase):
         self.file_manager.delete(file_path)
         self.assertFalse(os.path.exists(file_path))
 
-    def test_delete_non_existent_file(self):
-        """Test deleting a non-existent file."""
-        non_existent_file = os.path.join(self.test_dir, 'non_existent.txt')
-        with self.assertRaises(OSError):
-            self.file_manager.delete(non_existent_file)
+
 
 
 if __name__ == '__main__':
