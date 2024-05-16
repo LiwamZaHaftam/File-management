@@ -140,5 +140,11 @@ class TestFileManager(unittest.TestCase):
         files = self.file_manager.list_files()
         self.assertEqual(files, [])
 
+    def test_list_files_in_non_existent_directory(self):
+        """Test listing files in a non-existent directory."""
+        non_existent_dir = os.path.join(self.test_dir, 'non_existent')
+        with self.assertRaises(OSError):
+            self.file_manager.list_files(non_existent_dir)
+
 if __name__ == '__main__':
     unittest.main()
