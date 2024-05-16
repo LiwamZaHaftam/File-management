@@ -161,6 +161,15 @@ class TestFileManager(unittest.TestCase):
         with self.assertRaises(OSError):
             self.file_manager.calculate_file_hash(non_existent_file)
 
+    def test_calculate_file_hash_with_empty_file(self):
+        """Test calculating the hash of an empty file."""
+        empty_file_path = os.path.join(self.test_dir, 'empty.txt')
+        with open(empty_file_path, 'w') as f:
+            pass
+        file_hash = self.file_manager.calculate_file_hash(empty_file_path)
+        expected_hash = hashlib.sha256().hexdigest()
+        self.assertEqual(file_hash, expected_hash)
+
 
 if __name__ == '__main__':
     unittest.main()
