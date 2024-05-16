@@ -123,6 +123,12 @@ class TestFileManager(unittest.TestCase):
         with self.assertRaises(OSError):
             self.file_manager.delete(non_existent_file)
 
+    def test_list_files_in_valid_directory(self):
+        """Test listing files in a valid directory."""
+        self.file_manager.change_directory(self.test_dir)
+        files = self.file_manager.list_files()
+        self.assertIn('test.txt', files)
+
 
 
 if __name__ == '__main__':
