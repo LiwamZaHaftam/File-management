@@ -21,7 +21,7 @@ class TestFileManager(unittest.TestCase):
     def tearDown(self):
         if os.path.exists(self.test_file_path):
             os.chmod(self.test_file_path, 0o644)  # Restore file permissions
-        shutil.rmtree(self.test_dir)
+        shutil.rmtree(self.test_dir, ignore_errors=True)
         print(f"Finished test: {self._testMethodName}")
         
     def test_change_to_valid_directory(self):
