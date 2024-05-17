@@ -113,3 +113,37 @@ class FileManager:
             raise OSError(f"Error copying file: {e}")
         except PermissionError as e:
             raise PermissionError(f"Permission denied to copy file: {e}")
+
+
+
+   
+    def rename_file(self, source_file, new_filename):
+        """
+        Rename a file in the current directory.
+    
+        Args:
+            source_file (str): The path of the file to be renamed.
+            new_filename (str): The new filename.
+        """
+        try:
+            if not os.path.exists(source_file):
+                raise OSError(f"Source file '{source_file}' does not exist.")
+    
+            # Check if the new filename is valid
+            if not new_filename:
+                raise ValueError("New filename cannot be empty.")
+    
+            destination_file = os.path.join(os.path.dirname(source_file), new_filename)
+            if os.path.exists(destination_file):
+                raise OSError(f"A file with the name '{new_filename}' already exists in the directory.")
+    
+            os.rename(source_file, destination_file)
+    
+            # Check if the source file still exists and delete it if it does
+            if os.path.exists(source_file):
+                os.chmod(source_file, 0o644)  # Set file to read-write
+                os.remove(source_file)
+        except OSError as e:
+            raise OSError(f"Error renaming file: {e}")
+        except ValueError as e:
+            raise ValueError(f"Invalid filename: {e}")
