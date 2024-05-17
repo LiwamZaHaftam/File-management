@@ -193,5 +193,7 @@ class TestFileManager(unittest.TestCase):
         """Test copying a file to a non-existent destination directory."""
         pass
     
+    def test_copy_non_existent_file(self):
+        pass
 if __name__ == '__main__':
     unittest.main()
