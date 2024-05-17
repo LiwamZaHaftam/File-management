@@ -225,7 +225,13 @@ class TestFileManager(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.file_manager.rename_file(source_file, '')
 
-
+    def test_rename_non_existent_file(self):
+        """Test renaming a non-existent file."""
+        self.file_manager.change_directory(self.test_dir)
+        non_existent_file = os.path.join(self.test_dir, 'non_existent.txt')
+        new_filename = 'renamed_file.txt'
+        with self.assertRaises(OSError):
+            self.file_manager.rename_file(non_existent_file, new_filename)
 
 if __name__ == '__main__':
     unittest.main()
