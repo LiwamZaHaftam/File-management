@@ -218,7 +218,7 @@ class TestFileManager(unittest.TestCase):
         mock_os_rename.assert_called_once_with(source_file, destination_file)
         self.assertFalse(os.path.exists(source_file))
 
-def test_rename_file_with_empty_filename(self):
-    pass
+    def test_rename_file_with_empty_filename(self):
+        pass
 if __name__ == '__main__':
     unittest.main()
