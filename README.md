@@ -9,6 +9,8 @@ This repository contains a comprehensive test suite for the `FileManager` class,
 - [Test Cases](#test-cases)
 - [Contributing](#contributing)
 - [License](#license)
+- [credit](#credit)
+- [contact](#contact)
 
 ## Introduction
 The `FileManager` class provides a set of methods for performing various file management operations, including:
@@ -95,3 +97,13 @@ The test suite includes the following test cases:
 ## Contributing
 If you find any issues or have suggestions for improvements, feel free to open a new issue or submit a pull request. Contributions are welcome!
 
+## Credits
+The File Manager Test Suite was developed by
+- Liwam Yemane
+- Meareg Teferi
+- Nahom Gidey
+- Tedros G/her
+- Zahra Kasaw
+
+## Contact
+For any questions or feedback, you can reach out to me at [mearegbuna@gmail.com]
