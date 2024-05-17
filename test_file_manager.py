@@ -194,6 +194,7 @@ class TestFileManager(unittest.TestCase):
         pass
     
     def test_copy_non_existent_file(self):
+        """Test copying a non-existent file."""
         pass
 
 
