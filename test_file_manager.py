@@ -207,5 +207,25 @@ class TestFileManager(unittest.TestCase):
             self.file_manager.copy_file(non_existent_file, destination_dir)
 
 
+
+    def test_rename_file_in_valid_directory(self, mock_os_rename):
+        """Test renaming a file in a valid directory."""
+        self.file_manager.change_directory(self.test_dir)
+        source_file = os.path.join(self.test_dir, 'test.txt')
+        new_filename = 'renamed_file.txt'
+        self.file_manager.rename_file(source_file, new_filename)
+        destination_file = os.path.join(self.test_dir, new_filename)
+        mock_os_rename.assert_called_once_with(source_file, destination_file)
+        self.assertFalse(os.path.exists(source_file))
+
+    def test_rename_file_with_empty_filename(self):
+        """Test renaming a file with an empty filename."""
+        self.file_manager.change_directory(self.test_dir)
+        source_file = os.path.join(self.test_dir, 'test.txt')
+        with self.assertRaises(ValueError):
+            self.file_manager.rename_file(source_file, '')
+
+
+
 if __name__ == '__main__':
     unittest.main()
