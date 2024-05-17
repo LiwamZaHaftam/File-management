@@ -207,7 +207,7 @@ class TestFileManager(unittest.TestCase):
             self.file_manager.copy_file(non_existent_file, destination_dir)
 
 
-
+    @patch('os.rename')
     def test_rename_file_in_valid_directory(self, mock_os_rename):
         """Test renaming a file in a valid directory."""
         self.file_manager.change_directory(self.test_dir)
