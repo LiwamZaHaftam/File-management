@@ -170,6 +170,14 @@ class TestFileManager(unittest.TestCase):
         expected_hash = hashlib.sha256().hexdigest()
         self.assertEqual(file_hash, expected_hash)
 
+    def test_calculate_file_hash_with_large_file(self):
+        """Test calculating the hash of a large file."""
+        large_file_path = os.path.join(self.test_dir, 'large.txt')
+        with open(large_file_path, 'wb') as f:
+            f.write(os.urandom(1024 * 1024 * 10))  # 10 MB file
+        file_hash = self.file_manager.calculate_file_hash(large_file_path)
+        self.assertIsInstance(file_hash, str)
+        self.assertEqual(len(file_hash), 64)  # SHA-256 hash length
 
 if __name__ == '__main__':
     unittest.main()
