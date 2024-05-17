@@ -87,3 +87,29 @@ class FileManager:
         except OSError as e:
             raise e
 
+
+    def copy_file(self, source_file, destination_dir):
+        """
+        Copy a file from the source path to the destination directory.
+    
+        Args:
+            source_file (str): The path of the file to be copied.
+            destination_dir (str): The path of the destination directory.
+        """
+        try:
+            if not os.path.exists(source_file):
+                raise OSError(f"Source file '{source_file}' does not exist.")
+    
+            if not os.path.isdir(destination_dir):
+                raise OSError(f"Destination directory '{destination_dir}' does not exist.")
+    
+            # Check if the destination directory is writable
+            if not os.access(destination_dir, os.W_OK):
+                raise PermissionError(f"Cannot copy file to '{destination_dir}' (permission denied)")
+    
+            destination_file = os.path.join(destination_dir, os.path.basename(source_file))
+            shutil.copy(source_file, destination_file)
+        except OSError as e:
+            raise OSError(f"Error copying file: {e}")
+        except PermissionError as e:
+            raise PermissionError(f"Permission denied to copy file: {e}")
