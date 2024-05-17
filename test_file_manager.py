@@ -207,5 +207,10 @@ class TestFileManager(unittest.TestCase):
             self.file_manager.copy_file(non_existent_file, destination_dir)
 
 
+
+    def test_rename_file_in_valid_directory(self, mock_os_rename):
+        """Test renaming a file in a valid directory."""
+        pass
+
 if __name__ == '__main__':
     unittest.main()
