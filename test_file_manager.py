@@ -184,8 +184,9 @@ class TestFileManager(unittest.TestCase):
         binary_file_path = os.path.join(self.test_dir, 'binary.bin')
         with open(binary_file_path, 'wb') as f:
             f.write(b'\x00\x01\x02\x03\x04\x05\x06\x07')
-
-
+        file_hash = self.file_manager.calculate_file_hash(binary_file_path)
+        expected_hash = hashlib.sha256(b'\x00\x01\x02\x03\x04\x05\x06\x07').hexdigest()
+        self.assertEqual(file_hash, expected_hash)
 
 if __name__ == '__main__':
     unittest.main()
