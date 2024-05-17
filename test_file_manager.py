@@ -179,5 +179,13 @@ class TestFileManager(unittest.TestCase):
         self.assertIsInstance(file_hash, str)
         self.assertEqual(len(file_hash), 64)  # SHA-256 hash length
 
+    def test_calculate_file_hash_with_binary_file(self):
+        """Test calculating the hash of a binary file."""
+        binary_file_path = os.path.join(self.test_dir, 'binary.bin')
+        with open(binary_file_path, 'wb') as f:
+            f.write(b'\x00\x01\x02\x03\x04\x05\x06\x07')
+
+
+
 if __name__ == '__main__':
     unittest.main()
