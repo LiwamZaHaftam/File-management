@@ -219,6 +219,13 @@ class TestFileManager(unittest.TestCase):
         self.assertFalse(os.path.exists(source_file))
 
     def test_rename_file_with_empty_filename(self):
-        pass
+        """Test renaming a file with an empty filename."""
+        self.file_manager.change_directory(self.test_dir)
+        source_file = os.path.join(self.test_dir, 'test.txt')
+        with self.assertRaises(ValueError):
+            self.file_manager.rename_file(source_file, '')
+
+
+
 if __name__ == '__main__':
     unittest.main()
