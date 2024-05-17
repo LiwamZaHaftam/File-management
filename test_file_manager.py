@@ -210,7 +210,13 @@ class TestFileManager(unittest.TestCase):
 
     def test_rename_file_in_valid_directory(self, mock_os_rename):
         """Test renaming a file in a valid directory."""
-        pass
+        self.file_manager.change_directory(self.test_dir)
+        source_file = os.path.join(self.test_dir, 'test.txt')
+        new_filename = 'renamed_file.txt'
+        self.file_manager.rename_file(source_file, new_filename)
+        destination_file = os.path.join(self.test_dir, new_filename)
+        mock_os_rename.assert_called_once_with(source_file, destination_file)
+        self.assertFalse(os.path.exists(source_file))
 
 if __name__ == '__main__':
     unittest.main()
