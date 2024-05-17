@@ -31,6 +31,13 @@ To run the test suite, you'll need the following:
 - The `unittest` module (part of the Python standard library)
 
 ## Usage
+You can clone the repository and navigate to the project directory:
+
+```
+git clone https://github.com/mearegteferi/File-management
+cd File-management
+```
+
 To run the test suite, simply execute the `test_file_manager.py` script:
 
 ```
@@ -88,5 +95,3 @@ The test suite includes the following test cases:
 ## Contributing
 If you find any issues or have suggestions for improvements, feel free to open a new issue or submit a pull request. Contributions are welcome!
 
-## License
-This project is licensed under the [MIT License](LICENSE).
