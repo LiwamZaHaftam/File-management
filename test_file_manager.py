@@ -194,6 +194,8 @@ class TestFileManager(unittest.TestCase):
         self.file_manager.change_directory(self.test_dir)
         source_file = os.path.join(self.test_dir, 'test.txt')
         non_existent_dir = os.path.join(self.test_dir, 'non_existent')
+        with self.assertRaises(OSError):
+            self.file_manager.copy_file(source_file, non_existent_dir)
     
     def test_copy_non_existent_file(self):
         """Test copying a non-existent file."""
